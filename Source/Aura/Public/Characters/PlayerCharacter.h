@@ -20,9 +20,15 @@ public:
 	APlayerCharacter();
 	virtual void Tick(float DeltaTime) override;
 
+	//for ASC owner and avatar information
+	virtual void PossessedBy(AController* NewController) override;
+	//virtual void OnRep_PlayerState() override;
+
+	void InitAbilityActorInfo();
 protected:
 
 	virtual void BeginPlay() override;
+	
 
 private:
 

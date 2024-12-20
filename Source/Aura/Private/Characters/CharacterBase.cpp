@@ -16,6 +16,12 @@ ACharacterBase::ACharacterBase()
 
 }
 
+//returns ASC pointer
+UAbilitySystemComponent* ACharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 // Called when the game starts or when spawned
 void ACharacterBase::BeginPlay()
 {

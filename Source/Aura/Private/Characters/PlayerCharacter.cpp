@@ -2,9 +2,13 @@
 
 
 #include "Characters/PlayerCharacter.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
+#include "AbilitySystem/BaseAttributeSet.h"
 #include "Camera/CameraComponent.h"
+#include "Game/PlayerCharacterState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -31,6 +35,13 @@ APlayerCharacter::APlayerCharacter()
 	//Setting Camera component
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera Component"));
 	CameraComponent->SetupAttachment(CameraBoom);
+
+	//Gameplay Ability components & attribute set
+	AbilitySystemComponent = CreateDefaultSubobject<UBaseAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+
+	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>(TEXT("AbilitySet"));
 }
 
 void APlayerCharacter::Tick(float DeltaTime)
@@ -38,7 +49,35 @@ void APlayerCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void APlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	InitAbilityActorInfo();
+}
+
+/*/void APlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	InitAbilityActorInfo();
+}*/
+
+void APlayerCharacter::InitAbilityActorInfo()
+{
+	//we are both informing who the owner/avatar is for the playerCharacter,
+	// (PLayerCharacterState/PlayerCharacter) and initializing the ASC/AT.
+	APlayerCharacterState* PlayerCharacterState = GetPlayerState<APlayerCharacterState>();
+	if (IsValid(PlayerCharacterState))
+	{
+		PlayerCharacterState->GetAbilitySystemComponent()->InitAbilityActorInfo(PlayerCharacterState, this);
+		
+		//set the ASC and ATT pointers
+		AbilitySystemComponent = PlayerCharacterState->GetAbilitySystemComponent();
+		AttributeSet = PlayerCharacterState->GetAttributeSet();
+	}
+}
+
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 }
+

@@ -6,7 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "PlayerCharacterController.generated.h"
 
-
+class IEnemyInterface;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
@@ -23,6 +23,7 @@ class AURA_API APlayerCharacterController : public APlayerController
 	
 public:
 	APlayerCharacterController();
+	virtual void PlayerTick(float DeltaTime) override;
 	
 protected:
 	virtual void BeginPlay();
@@ -36,5 +37,12 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	void Move(const FInputActionValue& InputActionValue);
+
+	//for mouse collision detection
+	//void CursorTrace();
+
+	TScriptInterface<IEnemyInterface> LastActor;
+	TScriptInterface<IEnemyInterface> ThisActor;
+
 
 };

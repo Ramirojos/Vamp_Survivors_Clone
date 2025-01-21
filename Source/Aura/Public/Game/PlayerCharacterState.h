@@ -21,7 +21,7 @@ public:
 
 	APlayerCharacterState();
 
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent()const override;
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 protected:

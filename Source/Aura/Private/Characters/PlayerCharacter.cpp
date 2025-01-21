@@ -8,6 +8,8 @@
 #include "Game/PlayerCharacterState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "PlayerController/PlayerCharacterController.h"
+#include "UI/HUD/AuraHUD.h"
 
 
 APlayerCharacter::APlayerCharacter()
@@ -60,7 +62,8 @@ void APlayerCharacter::PossessedBy(AController* NewController)
 	Super::OnRep_PlayerState();
 	InitAbilityActorInfo();
 }*/
-
+ //From AuraHUD InitOverlay:
+ //  called en possesedby, we already the four key variables that will be used to create a WidgetController 
 void APlayerCharacter::InitAbilityActorInfo()
 {
 	//we are both informing who the owner/avatar is for the playerCharacter,
@@ -73,7 +76,14 @@ void APlayerCharacter::InitAbilityActorInfo()
 		//set the ASC and ATT pointers
 		AbilitySystemComponent = PlayerCharacterState->GetAbilitySystemComponent();
 		AttributeSet = PlayerCharacterState->GetAttributeSet();
-	}
+
+		if (APlayerCharacterController* PlayerCharacterController = Cast<APlayerCharacterController>(GetController()))
+		{
+			if (AAuraHUD* AuraHUD = Cast<AAuraHUD>(PlayerCharacterController->GetHUD())) {
+				AuraHUD->InitOverlay(PlayerCharacterController, PlayerCharacterState, AbilitySystemComponent, AttributeSet);
+			}
+		}
+	}	
 }
 
 void APlayerCharacter::BeginPlay()

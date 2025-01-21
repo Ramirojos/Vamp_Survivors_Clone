@@ -30,9 +30,10 @@ void APlayerCharacterController::BeginPlay()
 	
 	
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem)
-	Subsystem->AddMappingContext(PlayerContext, 0);
-	
+	if (Subsystem) {
+		Subsystem->AddMappingContext(PlayerContext, 0);
+	}
+
 	//we want to sow the mouse when in menus/widgets
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
@@ -66,6 +67,7 @@ void APlayerCharacterController::Move(const FInputActionValue& InputActionValue)
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
+	
 }
 
 /*void APlayerCharacterController::CursorTrace()

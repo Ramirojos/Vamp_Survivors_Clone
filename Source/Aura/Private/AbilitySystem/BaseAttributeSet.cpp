@@ -5,5 +5,11 @@
 
 UBaseAttributeSet::UBaseAttributeSet()
 {
-	InitHealth(100);
+	InitHealth(75);
+	InitMaxHealth(100);
+	InitMana(50);
+	InitMaxMana(50);
+	InitExperience(0);
 }
+
+

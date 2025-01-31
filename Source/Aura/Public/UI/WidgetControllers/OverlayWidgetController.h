@@ -19,6 +19,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnXPChangedSignature, float, NewXP)
  */
 
 class UBaseAttributeSet;
+struct FOnAttributeChangeData;
 
 UCLASS(BLueprintType, Blueprintable)
 class AURA_API UOverlayWidgetController : public UAuraWidgetController
@@ -28,6 +29,10 @@ class AURA_API UOverlayWidgetController : public UAuraWidgetController
 public:
 		
 		virtual void BroadcastInitialValues() override;
+
+		virtual void BindCallbacksToDependencies() override;
+
+		
 
 		//  All Attrubtes Will be binded in blueprint.
 		UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
@@ -40,10 +45,16 @@ public:
 		FOnManaChangedSignature OnManaChanged;
 
 		UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
-		FOnMaxManaChangedSignature OnMaxmanaChanged;
+		FOnMaxManaChangedSignature OnMaxManaChanged;
 
 		UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 		FOnXPChangedSignature OnXPChanged;
 
+protected:
+
+	void HealthChanged(const FOnAttributeChangeData& Data);
+	void MaxHealthChanged(const FOnAttributeChangeData& Data);
+	void ManaChanged(const FOnAttributeChangeData& Data);
+	void MaxManaChanged(const FOnAttributeChangeData& Data);
 
 };

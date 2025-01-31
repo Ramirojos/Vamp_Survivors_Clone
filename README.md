@@ -14,4 +14,6 @@ This project was created to keep learning Unreal Engine and game development in 
   HUD, Overlay health/mana widgets.
   Link with GAS to update the healt/mana widgets. (Delegates).
 
+### 01/24/2025
 
+Implementation of Gameplay Effects. Instant, duration and Infinite. Removal of effects.

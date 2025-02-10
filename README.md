@@ -9,11 +9,23 @@ This project was created to keep learning Unreal Engine and game development in 
 
 ### 01/24/2025
 
-  UI:
-  
+UI:
   HUD, Overlay health/mana widgets.
   Link with GAS to update the healt/mana widgets. (Delegates).
 
 ### 01/24/2025
 
-Implementation of Gameplay Effects. Instant, duration and Infinite. Removal of effects.
+ASC:
+  Implementation of Gameplay Effects. Instant, duration and Infinite. Removal of effects.
+
+### 02/10/2025
+
+ASC:
+  Implementation of Gameplay tags.
+  Initialization of Primary atributes.
+
+UI:
+  Link UI with gameplay tags.
+  Cration of backgroung "ghost" globe for health and mana globes.
+  Link wisgets o gamepla effects.
+  

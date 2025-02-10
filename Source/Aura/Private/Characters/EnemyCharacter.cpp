@@ -19,14 +19,19 @@ AEnemyCharacter::AEnemyCharacter()
 }
 
 
+void AEnemyCharacter::InitAbilityActorInfo()
+{
+	//initializing ASC by specifying who is the 
+	//possessing actor and the avatar actor
+	if (AbilitySystemComponent) {
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+		Cast<UBaseAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorinfoSet();
+	}
+
+}
+
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	//initializing ASC by specifying who is the 
-	//possessing actor and the avatar actor
-	if(AbilitySystemComponent){
-		AbilitySystemComponent->InitAbilityActorInfo(this, this);
-	}
-	
+	InitAbilityActorInfo();
 }

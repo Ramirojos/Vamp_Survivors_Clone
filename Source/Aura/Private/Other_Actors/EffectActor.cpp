@@ -35,7 +35,7 @@ void AEffectActor::ApplyEffectOnTarget(AActor* TargetActor, TSubclassOf<UGamepla
 	//asks for a Tsubclass of UGameplayEffect, The GameplayEffect level and a FGameplayEffectContextHandle
 	//gets an outgoing gameplay effect hat is ready to be applied to other things
 	//returns a spech handle
-	FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContextHandle);
+	FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, ActorLevel, EffectContextHandle);
 
 	//takes the gameplayspeck, we have the handle, not the speck. we get the data from the handle(GameplayEffectSpec)
 	FActiveGameplayEffectHandle ActiveEffectHandle = TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data);

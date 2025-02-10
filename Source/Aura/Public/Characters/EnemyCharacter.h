@@ -22,7 +22,7 @@ public:
 	//Enemy Interface
 
 protected:
-
+	virtual void InitAbilityActorInfo() override;
 
 	virtual void BeginPlay() override;
 };

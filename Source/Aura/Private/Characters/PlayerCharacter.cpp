@@ -69,10 +69,13 @@ void APlayerCharacter::InitAbilityActorInfo()
 	//we are both informing who the owner/avatar is for the playerCharacter,
 	// (PLayerCharacterState/PlayerCharacter) and initializing the ASC/AT.
 	APlayerCharacterState* PlayerCharacterState = GetPlayerState<APlayerCharacterState>();
+
 	if (IsValid(PlayerCharacterState))
 	{
 		PlayerCharacterState->GetAbilitySystemComponent()->InitAbilityActorInfo(PlayerCharacterState, this);
 		
+		Cast<UBaseAbilitySystemComponent>(PlayerCharacterState->GetAbilitySystemComponent())->AbilityActorinfoSet();
+
 		//set the ASC and ATT pointers
 		AbilitySystemComponent = PlayerCharacterState->GetAbilitySystemComponent();
 		AttributeSet = PlayerCharacterState->GetAttributeSet();
@@ -84,6 +87,8 @@ void APlayerCharacter::InitAbilityActorInfo()
 			}
 		}
 	}	
+
+	InitializePrimaryAttributes();
 }
 
 void APlayerCharacter::BeginPlay()

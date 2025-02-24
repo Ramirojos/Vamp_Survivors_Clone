@@ -19,6 +19,11 @@ AEnemyCharacter::AEnemyCharacter()
 }
 
 
+int32 AEnemyCharacter::GetPlayerLevel()
+{
+	return Level;
+}
+
 void AEnemyCharacter::InitAbilityActorInfo()
 {
 	//initializing ASC by specifying who is the 

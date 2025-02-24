@@ -88,7 +88,17 @@ void APlayerCharacter::InitAbilityActorInfo()
 		}
 	}	
 
-	InitializePrimaryAttributes();
+	InitializeDefaultAttributes();
+}
+
+int32 APlayerCharacter::GetPlayerLevel()
+{
+	APlayerCharacterState* PlayerCharacterState = GetPlayerState<APlayerCharacterState>();
+	if (IsValid(PlayerCharacterState))
+	{
+		return PlayerCharacterState->GetPlayerLevel();
+	}
+	return 0;
 }
 
 void APlayerCharacter::BeginPlay()

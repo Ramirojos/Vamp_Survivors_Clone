@@ -25,6 +25,9 @@ public:
 	//virtual void OnRep_PlayerState() override;
 
 	virtual void InitAbilityActorInfo() override;
+
+	//Combat interface
+	virtual int32 GetPlayerLevel() override;
 protected:
 
 	virtual void BeginPlay() override;

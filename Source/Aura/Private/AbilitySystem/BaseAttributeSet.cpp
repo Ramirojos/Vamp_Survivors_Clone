@@ -9,11 +9,6 @@
 
 UBaseAttributeSet::UBaseAttributeSet()
 {
-	InitHealth(50);
-	InitMaxHealth(100);
-	InitMana(10);
-	InitMaxMana(50);
-	InitExperience(0);
 }
 
 //Clamp Att values before changes are made

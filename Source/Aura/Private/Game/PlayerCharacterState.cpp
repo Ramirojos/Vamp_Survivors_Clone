@@ -7,15 +7,10 @@
 
 APlayerCharacterState::APlayerCharacterState()
 {
-	//Constructon ASC and Att.Set, replication no needed since it's a single player game
+	//Constructon ASC and Att.
 	AbilitySystemComponent = CreateDefaultSubobject<UBaseAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
-	//AbilitySystemComponent->SetIsReplicated(true);
-	//AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 
 	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>(TEXT("AbilitySet"));
-
-	//how often update the client
-	//NetUpdateFrequency = 100.f;
 }
 
 //returns ASC pointer

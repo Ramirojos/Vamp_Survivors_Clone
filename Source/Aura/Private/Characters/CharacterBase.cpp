@@ -34,16 +34,25 @@ void ACharacterBase::InitAbilityActorInfo()
 {
 }
 
-void ACharacterBase::InitializePrimaryAttributes()
+
+
+void ACharacterBase::InitializeDefaultAttributes()
 {
-	//apply the gaeplay spec to the target ASC
-
-	check(IsValid(GetAbilitySystemComponent()));
-	check(DefaultPrimaryAttributes);
-
-	const FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
-	const FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(DefaultPrimaryAttributes, 1.f, ContextHandle);
-	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), GetAbilitySystemComponent());
-
+	ApplyEffectToSelf(DefaultPrimaryAttributes, 1.f);
+	ApplyEffectToSelf(DefaultSecondaryAttributes, 1.f);
+	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
 }
 
+void ACharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level)
+{
+	//apply the gameplay spec to the target ASC
+
+	check(IsValid(GetAbilitySystemComponent()));
+	check(GameplayEffectClass);
+
+	//gameplay effect that will set the initial base attributes (strength, dexterity, etc)
+	FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
+	const FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(GameplayEffectClass, Level, ContextHandle);
+	ContextHandle.AddSourceObject(this);
+	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), GetAbilitySystemComponent());
+}

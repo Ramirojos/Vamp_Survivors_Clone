@@ -27,5 +27,15 @@ ASC:
 UI:
   Link UI with gameplay tags.
   Cration of backgroung "ghost" globe for health and mana globes.
-  Link wisgets o gamepla effects.
+  Link widgets o gameplay effects.
+
+### 02/24/2025
+
+ASC:
+  Initialization of secondary attributes (attribute based and magnitude calculations).
+
+UI:
+  OverlayWidgetController refactor.
+  Creation of attributes/player level main menu.
+
   
